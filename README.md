@@ -15,3 +15,6 @@ software/ - contains the software that runs on the devices. We used the Arduino 
 ##Known Issues
 
 ##Aknowledgements
+
+![Shapelab Logo](/images/shapelab.png)
+![MediaLab Logo](/images/medialablogo.png)
