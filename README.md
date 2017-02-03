@@ -22,7 +22,7 @@ The design contains many 3D printed custom parts and custom circuit boards. Maki
 The localization of the robot is not implemented in the current code. This version has high resolution wheel encoders and a powerful ARM processor, so the tracking will be better. 
 
 ##Aknowledgements
-This project was a collaboration between MIT Media lab (Responsive Environments and Living Mobile) and Shape Lab at Stanford University
+This project was a collaboration between MIT Media Lab (Responsive Environments and Living Mobile) and Shape Lab at Stanford University
 
 The poeple who worked on this project are:
 
