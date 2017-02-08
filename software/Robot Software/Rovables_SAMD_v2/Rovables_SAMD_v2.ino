@@ -1,3 +1,5 @@
+//TODO: Add radio powerdown/up
+
 #include <SPI.h>
 #include "nRF24L01.h"
 #include "RF24.h"
@@ -54,7 +56,8 @@ void setup(void)
 
   radio.setRetries(10,0); //retries, delay
   radio.setPayloadSize(PACKET_SIZE);
-  radio.setDataRate( RF24_2MBPS ) ;
+  radio.setDataRate(RF24_2MBPS);
+  radio.setChannel(60);
 
   radio.openReadingPipe(0,PTXpipe);  //open reading or receive pipe
   radio.stopListening();
@@ -80,15 +83,14 @@ void setup(void)
 void loop(void)
 {
   
-  dataToWrite[1] = counter;
-  dataToWrite[2] =failureToWriteCounter;
-
-
   if(timer4Interrupt==true) { 
+    dataToWrite[1] = counter;
+    dataToWrite[2] =failureToWriteCounter;
+    dataToWrite[3] = encoder1Counter;  
+    dataToWrite[4] = encoder2Counter;
     sendAndReceiveResponse();
     timer4Interrupt=false;
-      dataToWrite[3] = encoder1Counter;  
-      dataToWrite[4] = encoder2Counter;
+
   } 
 }
 
@@ -113,13 +115,14 @@ void ENC2_INT_Routine() {
 }
 
 void sendAndReceiveResponse() { 
+  radio.powerUp();
   //Send radio data  
   radio.stopListening();
   radio.openWritingPipe(PTXpipe);        //open writing or transmit pipe
   if (!radio.write( &dataToWrite, PACKET_SIZE )){  //if the write fails let the user know over serial monitor
      if(SERIAL_DEBUG)SerialUSB.println("Failed");   
      failureToWriteCounter++;   
-  }
+  } 
  else {
     if(SERIAL_DEBUG)SerialUSB.println("SUCCESS");
   }
@@ -155,6 +158,7 @@ void sendAndReceiveResponse() {
           break;
         }
     }
+    radio.powerDown();
 }
 
 void toogleLedWhenData() {
@@ -256,13 +260,17 @@ void startTransmitTimer4(int freq) {
 } 
 
 void turnOffEncoders() {
-  analogWrite(ENC1_LED, 0);
-  analogWrite(ENC2_LED, 0);
+  //analogWrite(ENC1_LED, 0);
+  //analogWrite(ENC2_LED, 0);
+  digitalWrite(ENC1_LED, LOW);
+  digitalWrite(ENC2_LED, LOW);
 }
 
 void turnOnEncoders() {
-  analogWrite(ENC1_LED, 200);
-  analogWrite(ENC2_LED, 200);
+  //analogWrite(ENC1_LED, 200);
+  //analogWrite(ENC2_LED, 200);
+  digitalWrite(ENC1_LED, HIGH);
+  digitalWrite(ENC2_LED, HIGH);
 }
 
 void turnOffMotors(){
