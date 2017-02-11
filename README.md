@@ -28,7 +28,7 @@ The poeple who worked on this project are:
 
 Graduate students: Artem Dementyev, Hsin-Liu (Cindy) Kao, Inrak Choi, Deborah Ajilo, Maggie Xu. 
 
-The faculty: Sean Follmer, Joe Paradiso, Chris Shmandth.
+The faculty: Sean Follmer, Joe Paradiso, Chris Schmandt.
 
 Undegraduate students: Lucas Santana, Karla-Sofia Zapata-Garcia, Cheyenne Hua, and Diana Lamaute
 
