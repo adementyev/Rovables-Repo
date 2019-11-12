@@ -19,6 +19,8 @@ software/ - contains the software that runs on the devices. We used the Arduino 
 The design contains many 3D printed custom parts and custom circuit boards. Making the design will require at least a good resolution 3D printer (Formlabs or Eden260). Other printers might work also, but we haven't tried them. 
 
 ## Known Issues
+The same nRF42 library is used for the robot and the receiver. Change in nRF52.cpp file: #define TEENSY_MASTER_BOARD depending on which one, since they use different SPI port definitions. 
+
 The localization of the robot is not implemented in the current code. This version has high resolution wheel encoders and a powerful ARM processor, so the tracking will be better. 
 
 ## Aknowledgements
